@@ -1,0 +1,234 @@
+﻿
+@model asb.ViewModel.mediaVM
+
+@using (Html.BeginForm("Media", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "userFormOfImage" }))
+
+{
+    <div class="form-group ">
+
+
+
+        <input value="user" hidden name="dataType" />
+        <input name="typeTitle" id="UNAME" hidden />
+        <input class="col-md-4 col-sm-4 col-xs-12 " style="padding-top:8px; display: inline-block; float: right" id="fileuploadUser" type="file" name="fileuploadUser" multiple="multiple" accept="image/*">
+        <a id="userSetImage" class="btn btn-primary">تایید</a>
+        <script>
+                       $("#UNAME").val($("#UserInput").val());
+                       $("#userSetImage").click(function () {
+                           
+                            var file = fileuploadUser.value;
+                            var FF = document.getElementById("istrueimageUser").innerHTML;
+                           console.log("after FF")
+
+                           if (file != "") {
+                               console.log("after file not null")
+                                if (FF == "1") {
+                                    toastr.options = {
+                                        "debug": false,
+                                        "positionClass": "toast-top-center",
+                                        "onclick": null,
+                                        "fadeIn": 300,
+                                        "fadeOut": 1000,
+                                        "timeOut": 5000,
+                                        "extendedTimeOut": 1000
+                                    }
+                                    toastr.error('عکس های آپلود شده باید حجم کمتر از 1 مگا بایت  و عرض بیش از 1000 پیکسل داشته باشند')
+                                    //$("#addproduct00").submit();
+                                }
+                                else {
+                                    console.log("befor submit")
+                                    $("#userFormOfImage").submit();
+                                }
+
+                            }
+
+                            else {
+                                toastr.options = {
+                                    "debug": false,
+                                    "positionClass": "toast-top-center",
+                                    "onclick": null,
+                                    "fadeIn": 300,
+                                    "fadeOut": 1000,
+                                    "timeOut": 5000,
+                                    "extendedTimeOut": 1000
+                                }
+                                toastr.error('تصویر مورد نظر را انتخاب کنید')
+                            }
+                        })
+
+        </script>
+
+        <div id="istrueimageUser" style="display:none">سلام</div>
+        <script>
+                        var _URL = window.URL;
+                        $("#fileuploadUser").change(function (e) {
+                            document.getElementById("istrueimageUser").innerHTML = "0";
+                            var file, img;
+                            for (var i = 0; i < this.files.length; i++) {
+                                if ((file = this.files[i])) {
+                                    size = this.files[i].size;
+                                    filename = this.files[i].filename;
+
+                                    img = new Image();
+                                    img.onload = function () {
+                                        // if (this.width !== 500 && this.height !== 500 ) {
+                                        if (size > 1000000) {
+
+                                            document.getElementById("istrueimageUser").innerHTML = "1";
+                                            toastr.options = {
+                                                "debug": false,
+                                                "positionClass": "toast-top-center",
+                                                "onclick": null,
+                                                "fadeIn": 300,
+                                                "fadeOut": 1000,
+                                                "timeOut": 5000,
+                                                "extendedTimeOut": 1000
+                                            }
+                                            toastr.error('بیش از 1 مگا بایت است ' + ' سایز عکس')
+                                        }
+                                        if (this.width < 1000) {
+
+                                            document.getElementById("istrueimageUser").innerHTML = "1";
+                                            toastr.options = {
+                                                "debug": false,
+                                                "positionClass": "toast-top-center",
+                                                "onclick": null,
+                                                "fadeIn": 300,
+                                                "fadeOut": 1000,
+                                                "timeOut": 5000,
+                                                "extendedTimeOut": 1000
+                                            }
+                                            toastr.error('عرض اسلاید باید بیش از 1000 پیکسل باشد')
+                                        }
+                                        // alert("Width:" + this.width + "   Height: " + this.height);//this will give you image width and height and you can easily validate here....
+                                    };
+                                    img.src = _URL.createObjectURL(file);
+                                }
+                            }
+
+                        });
+
+
+
+
+        </script>
+
+
+
+    </div>
+}
+
+
+<div class="form-group ">
+
+    @{
+
+        if (Model.mediaList != null && Model.mediaList.Count > 0)
+        {
+
+            foreach (var item in Model.mediaList)
+            {
+                string ID = item.ID.ToString();
+                string deletetid = "addtocart" + ID;
+                string title = "titleof" + ID;
+
+                <div class="imagelistholder">
+
+                    <div class="con">
+
+                        <img src="/images/panelimages/@item.title" data-imagezoom="true" class=" back">
+                        <button id=@deletetid class="btn deleteimage">حذف</button>
+                        <div style="display:none" id=@title>@item.title</div>
+                    </div>
+
+                    <style>
+                        .imagelistholder {
+                            display: inline-block;
+                            width: 200px;
+                            padding: 5px;
+                            border: 1px solid #eee;
+                            box-shadow: 3px 3px #eee;
+                            border-radius: 25px;
+                        }
+
+                        .con {
+                            position: relative;
+                            width: 100%;
+                        }
+
+                            /* Make the image responsive */
+                            .con img {
+                                width: 100%;
+                                height: auto;
+                                border-radius: 25px;
+                            }
+
+                            /* Style the button and place it in the middle of the container/image */
+                            .con .btn {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                -ms-transform: translate(-50%, -50%);
+                                background-color: #555;
+                                color: white;
+                                font-size: 16px;
+                                padding: 12px 24px;
+                                border: none;
+                                cursor: pointer;
+                                border-radius: 5px;
+                            }
+
+                                .con .btn:hover {
+                                    background-color: black;
+                                }
+                    </style>
+
+
+                </div>
+
+            }
+        }
+
+
+
+
+    }
+
+
+    <script>
+
+
+                    $(".deleteimage").click(function () {
+
+                        var orderid = $("#orderidholder").text();
+                        var id = this.id;
+                        var res = id.substring(9, id.length);
+                        var titleid = "titleof" + res;
+                        var name = $('#' + titleid).text();
+
+
+
+
+
+
+                        $.ajax({
+                            url: '/Admin/DeleteUserimage',
+                            dataType: 'html',
+                            data: {
+                                id: id,
+                                title: name,
+                                type : 'user'
+                            },
+                            success: function (data) {
+                                window.location.href = "/Admin/Slider";
+                                window.location.reload();
+                            },
+                            error: function () {
+
+                            }
+                        });
+                    })
+    </script>
+
+</div>
