@@ -189,6 +189,8 @@
     <Content Include="Content\main.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\toastr.css" />
+    <Content Include="Content\wp-content\plugins.css" />
+    <Content Include="Content\wp-content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\lg.svg" />
@@ -199,6 +201,7 @@
     <Content Include="fonts\webfonts\fa-solid-900.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\back.jpg" />
     <Content Include="images\bio2.jpg" />
     <Content Include="images\biographyImage.jpg" />
     <Content Include="images\blogDetailImage.jpg" />
@@ -262,6 +265,7 @@
     <Content Include="fonts\woff\IRANSansWeb%28FaNum%29_Light.woff" />
     <Content Include="fonts\woff\IRANSansWeb%28FaNum%29_Medium.woff" />
     <Content Include="fonts\woff\IRANSansWeb%28FaNum%29_UltraLight.woff" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\clipBoard.js" />
     <Content Include="Scripts\demo.js" />

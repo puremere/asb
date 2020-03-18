@@ -84,7 +84,7 @@
                 <span class="nos"></span>
                 <span class="ncs"></span>
                 <span class="nbs"></span>
-                <div class="nav-text">منو</div>
+                <div class="nav-text" style="font-family:IRANSans;">منو</div>
             </div>
             <!-- Nav button end -->
             <!-- Logo-->
@@ -101,8 +101,8 @@
             <!-- header-info -->
             <div class="header-info">
                 <ul>
-                    <li><span>Mail : </span><a href="#">info@tehranhorse.com</a></li>
-                    <li><span>Phone : </span><a href="#">09121111111</a></li>
+                    <li><span style="font-family:IRANSans; font-size:14px"> info@tehranhorse.com</span><a style="font-weight:500; font-family:IRANSans; font-size:14px" href="#">: ایمیل</a></li>
+                    <li><span style="font-family:IRANSans; font-size:14px"> 09121111111 </span><a style="font-weight:500;font-family:IRANSans; font-size:14px" href="#"> : تلفن</a></li>
                 </ul>
             </div>
             <!-- header-info end -->
@@ -116,11 +116,23 @@
                 <div class="nav-inner isDown">
                     <div id="hid-men">
                         <ul id="menu-main-navigation-menu" class="bloom_main-nav">
-                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="/Home/Index" class="ajax">گالری</a></li>
+                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="/Home/Index" class="ajax">گالری عکس</a></li>
+                            <li id="menu-item-498" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-498"><a href="/Home/Video" class="ajax">گالری ویدیو</a></li>
                             <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="/Home/Live" class="ajax">پخش زنده</a></li>
                             <li id="menu-item-473" class="ajax blog-menu menu-item menu-item-type-post_type menu-item-object-page menu-item-473"><a href="/Home/Blog" class="ajax">اخبار</a></li>
-                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="Home/bio" class="ajax">درباره من</a></li>
-                       
+                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/bio" class="ajax">درباره من</a></li>
+                            @{
+                                if (Session["User"] != null)
+                                {
+                                    <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/profile" class="ajax">پروفایل</a></li>
+
+                                }
+                                else
+                                {
+                                    <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/loginRegister" class="ajax">ورود - ثبت نام</a></li>
+
+                                }
+                            }
 
                         </ul>
                     </div>
@@ -130,7 +142,7 @@
 
                 <div class="fixed-column">
                     <div class="bg" data-bg="/images/biographyImage.jpg"></div>
-                    
+
                 </div>
                 <div class="column-wrap" style="padding-top:40px">
                     <div class="content">
@@ -148,44 +160,44 @@
                                                     <h2 style="text-align:right; float:right">بیوگرافی - قاسم حسینی</h2>
                                                 </div>
                                                 <div class="clearfix"></div><div class="vc_row wpb_row vc_inner vc_row-fluid">
-    <div class="wpb_column vc_column_container vc_col-sm-5">
-        <div class="vc_column-inner ">
-            <div class="wpb_wrapper">
-                <div class="wpb_raw_code wpb_content_element wpb_raw_html">
-                    <div class="wpb_wrapper">
-                        <ul class="fl-wrap contact-list" style="direction:rtl">
-                            <li>
-                                <span style="padding-right: 0px;width: 100%;text-align: right;" >تخصص : </span><a href="#" style="padding-right: 0px;width: 100%;text-align: right;">عکاسی , طراحی</a>
-                            </li>
-                            <li>
-                                <span style="padding-right: 0px;width: 100%;text-align: right;">تاریخ تولد : </span><a style="padding-right: 0px;width: 100%;text-align: right;" href="#">11 آذر 1365</a>
-                            </li>
-                            <li>
-                                <span style="padding-right: 0px;width: 100%;text-align: right;">تحصیلات : </span> <a style="padding-right: 0px;width: 100%;text-align: right;" href="#">فوق لیسانس عکاسی دانشگاه تهران</a>
-                            </li>
-                            <li>
-                                <span style="padding-right: 0px;width: 100%;text-align: right;">سرگرمی  : </span> <a style="padding-right: 0px;width: 100%;text-align: right;" href="#">گیم , مسافرت</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="wpb_column vc_column_container vc_col-sm-7">
-        <div class="vc_column-inner ">
-            <div class="wpb_wrapper">
-                <div class="wpb_single_image wpb_content_element vc_align_left">
+                                                    <div class="wpb_column vc_column_container vc_col-sm-5">
+                                                        <div class="vc_column-inner ">
+                                                            <div class="wpb_wrapper">
+                                                                <div class="wpb_raw_code wpb_content_element wpb_raw_html">
+                                                                    <div class="wpb_wrapper">
+                                                                        <ul class="fl-wrap contact-list" style="direction:rtl">
+                                                                            <li>
+                                                                                <span style="padding-right: 0px;width: 100%;text-align: right;font-family:IRANSans">تخصص : </span><a href="#" style="padding-right: 0px;width: 100%;text-align: right;font-family:IRANSans">عکاسی , طراحی</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span style="padding-right: 0px;width: 100%;text-align: right;font-family:IRANSans">تاریخ تولد : </span><a style="padding-right: 0px;width: 100%;text-align: right;font-family:IRANSans" href="#">11 آذر 1365</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span style="padding-right: 0px;width: 100%;text-align: right;font-family:IRANSans">تحصیلات : </span> <a style="padding-right: 0px;width: 100%;text-align: right;font-family:IRANSans" href="#">فوق لیسانس عکاسی دانشگاه تهران</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span style="padding-right: 0px;width: 100%;text-align: right;font-family:IRANSans">سرگرمی  : </span> <a style="padding-right: 0px;width: 100%;text-align: right;font-family:IRANSans" href="#">گیم , مسافرت</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="wpb_column vc_column_container vc_col-sm-7">
+                                                        <div class="vc_column-inner ">
+                                                            <div class="wpb_wrapper">
+                                                                <div class="wpb_single_image wpb_content_element vc_align_left">
 
-                    <figure class="wpb_wrapper vc_figure">
-                        <div class="vc_single_image-wrapper   vc_box_border_grey"><img width="737" height="807" src="/images/bio2.jpg" class="vc_single_image-img attachment-full" alt="" srcset="~/images/bio2.jpg 737w, ~/images/bio2.jpg 274w" sizes="(max-width: 737px) 100vw, 737px" /></div>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
+                                                                    <figure class="wpb_wrapper vc_figure">
+                                                                        <div class="vc_single_image-wrapper   vc_box_border_grey"><img width="737" height="807" src="/images/bio2.jpg" class="vc_single_image-img attachment-full" alt="" srcset="~/images/bio2.jpg 737w, ~/images/bio2.jpg 274w" sizes="(max-width: 737px) 100vw, 737px" /></div>
+                                                                    </figure>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-</div>
+                                                </div>
                                                 <div class="wpb_text_column wpb_content_element  vc_custom_1487405093559">
                                                     <div class="wpb_wrapper">
                                                         <p style="text-align:right">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
@@ -221,12 +233,12 @@
                                                         </div>
 
                                                     </div>
-                                                 </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div><div class="clearfix"></div>
+                                    </div><div class="clearfix"></div>
 
-                            </div>
+                                </div>
                         </article>
 
 

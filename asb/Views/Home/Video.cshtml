@@ -75,7 +75,7 @@
                 <span class="nos"></span>
                 <span class="ncs"></span>
                 <span class="nbs"></span>
-                <div class="nav-text">منو</div>
+                <div class="nav-text" style="font-family:IRANSans;">منو</div>
             </div>
             <!-- Nav button end -->
             <!-- Logo-->
@@ -92,8 +92,8 @@
             <!-- header-info -->
             <div class="header-info">
                 <ul>
-                    <li><span>Mail : </span><a href="#">info@tehranhorse.com</a></li>
-                    <li><span>Phone : </span><a href="#">09121111111</a></li>
+                    <li><span style="font-family:IRANSans; font-size:14px"> info@tehranhorse.com</span><a style="font-weight:500; font-family:IRANSans; font-size:14px" href="#">: ایمیل</a></li>
+                    <li><span style="font-family:IRANSans; font-size:14px"> 09121111111 </span><a style="font-weight:500;font-family:IRANSans; font-size:14px" href="#"> : تلفن</a></li>
                 </ul>
             </div>
             <!-- header-info end -->
@@ -111,8 +111,19 @@
                             <li id="menu-item-498" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-498"><a href="/Home/Video" class="ajax">گالری ویدیو</a></li>
                             <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="/Home/Live" class="ajax">پخش زنده</a></li>
                             <li id="menu-item-473" class="ajax blog-menu menu-item menu-item-type-post_type menu-item-object-page menu-item-473"><a href="/Home/Blog" class="ajax">اخبار</a></li>
-                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/bio" class="ajax">درباره ما</a></li>
+                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/bio" class="ajax">درباره من</a></li>
+                            @{
+                                if (Session["User"] != null)
+                                {
+                                    <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/profile" class="ajax">پروفایل</a></li>
 
+                                }
+                                else
+                                {
+                                    <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/loginRegister" class="ajax">ورود - ثبت نام</a></li>
+
+                                }
+                            }
 
                         </ul>
                     </div>
@@ -122,31 +133,33 @@
 
 
 
-                <section class='row' style="padding:80px 100px; " >
+                <section class='row' style="padding:0; margin:0">
+                    <img src="/images/back.jpg" style="width:100%; height:100%; opacity:0.5" />
 
+                    <div style="padding:50px; position:absolute; top:0; left:0; z-index:999; width:100%; height:100%">
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <div style=" width:25%; padding:3px; display:inline-block">
+                                    @*<iframe style="width:100%; height:auto" class="vid embed-responsive-item" src="/images/panelimages/@item.title"></iframe>*@
+                                    <video style="width:100%; height:auto" controls>
+                                        <source src="/images/panelimages/@item.title" type="video/mp4">
+                                        <source src="/images/panelimages/@item.title" type="video/ogg">
+                                        Your browser does not support the video tag.
+                                    </video>>
 
-                    @{
-                        foreach (var item in Model)
-                        {
-                    <div style="width:25%; padding:3px; display:inline-block">
-                        <iframe style="width:100%; height:auto" class="embed-responsive-item" src="/images/panelimages/@item.title"></iframe>
-                        @*<div class="row" style="position:relative; ">
-                            <video style="width:100%; height:auto" controls>
-                                <source  type="video/mp4">
-                                <source src="/images/panelimages/@item.title" type="video/ogg">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>*@
+                                </div>
 
-                    </div>
-                            
+                            }
                         }
-                    }
+                    </div>
+
 
                 </section>
+
                 <style>
                     video {
-                        position: absolute;
+                        position: relative;
                         right: 0;
                         bottom: 0;
                         min-width: 100%;
@@ -172,9 +185,7 @@
         <!--=============== footer ===============-->
         <footer class="bloom-footer main-footer">
 
-            <div class="policy-box">
-                <span>&#169; Bloom 2017  /  All rights reserved. </span>
-            </div>
+            
             <div class="footer-social">
                 <ul>
                     <li><a href="#" target="_blank"><i class="fa fa-facebook"></i><span>facebook</span></a></li>
@@ -214,7 +225,13 @@
     <script type='text/javascript' src='http://demowp.cththemes.com/bloom/wp-content/plugins/js_composer/assets/lib/vc_tabs/vc-tabs.min.js'></script>
     <script type='text/javascript' src='http://demowp.cththemes.com/bloom/wp-content/plugins/js_composer/assets/lib/prettyphoto/js/jquery.prettyPhoto.min.js?ver=5.0.1'></script>
     <script type='text/javascript' src='http://demowp.cththemes.com/bloom/wp-includes/js/wp-embed.min.js?ver=4.7.13'></script>
+    <script>
+        $(".vid").each(function () {
+            $(this).delay(1000).fadeIn();
+            //  sleep(1000);
+        })
 
+    </script>
 </body>
 </html>
 
