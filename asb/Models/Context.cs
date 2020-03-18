@@ -10,8 +10,15 @@ namespace asb.Models
 {
     public class Context : DbContext
     {
+        
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
         public Context() : base("asb1")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Context, asb.Migrations.Configuration>());
 
         }
         public DbSet<articleCat> articleCats { get; set; }
@@ -86,10 +93,12 @@ namespace asb.Models
     }
     public class user
     {
-        [Key]
+
+       
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int userID { get; set; }
         public string fullname { get; set; }
+        [Key]
         public string phone { get; set; }
         public string email { get; set; }
         public virtual ICollection<userMedia> usermedias {get; set;}

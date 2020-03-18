@@ -72,7 +72,7 @@
         </div>
     </div>
     <div id="main">
-        <header class="bloom-header main-header">
+        <header class="bloom-header main-header"  style="height:80px">
             <!-- Nav button-->
             <div class="nav-button">
                 <span class="nos"></span>
@@ -84,10 +84,10 @@
             <!-- Logo-->
             <div class="logo-holder">
                 <a class="ajax" href="http://demowp.cththemes.com/bloom/">
-                    <img src="http://demowp.cththemes.com/bloom/wp-content/themes/bloom/images/logo-demo-light.png"
+                    <img src="~/images/logo.png"
                          width="120"
-                         height="22"
-                         style="height:22px;"
+                         height="52"
+                         style="height:72px;"
                          class="bloom-logo" alt="Bloom" />
                 </a>
             </div>
@@ -95,8 +95,8 @@
             <!-- header-info -->
             <div class="header-info">
                 <ul>
-                    <li><span>Mail : </span><a href="#">yourmail@domain.com</a></li>
-                    <li><span>Phone : </span><a href="#">+7(111)123456789</a></li>
+                    <li><span>Mail : </span><a href="#">info@tehranhorse.com</a></li>
+                    <li><span>Phone : </span><a href="#">09121111111</a></li>
                 </ul>
             </div>
             <!-- header-info end -->
@@ -110,12 +110,24 @@
                 <div class="nav-inner isDown">
                     <div id="hid-men">
                         <ul id="menu-main-navigation-menu" class="bloom_main-nav">
-                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="/Home/Index" class="ajax">گالری</a></li>
-                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="http://demowp.cththemes.com/bloom/about/" class="ajax">پخش زنده</a></li>
+                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="/Home/Index" class="ajax">گالری عکس</a></li>
+                            <li id="menu-item-498" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-498"><a href="/Home/Video" class="ajax">گالری ویدیو</a></li>
+                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="/Home/Live" class="ajax">پخش زنده</a></li>
                             <li id="menu-item-473" class="ajax blog-menu menu-item menu-item-type-post_type menu-item-object-page menu-item-473"><a href="/Home/Blog" class="ajax">اخبار</a></li>
-                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="http://demowp.cththemes.com/bloom/about/" class="ajax">درباره ما</a></li>
-                            <li id="menu-item-498" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-498"><a href="http://demowp.cththemes.com/bloom/contact/" class="ajax">تماس با ما</a></li>
-                            
+                            <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/bio" class="ajax">درباره ما</a></li>
+                            @{
+                                if (Session["User"] != null)
+                                {
+                                    <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/profile" class="ajax">پروفایل</a></li>
+
+                                }
+                                else
+                                {
+                                    <li id="menu-item-570" class="ajax menu-item menu-item-type-post_type menu-item-object-page menu-item-570"><a href="~/Home/loginRegister" class="ajax">ورود - ثبت نام</a></li>
+
+                                }
+                            }
+
                         </ul>
                     </div>
                 </div>
@@ -131,7 +143,7 @@
                         <div class="row">
                             <div class="wpb_column vc_column_container vc_col-sm-12">
                                 <div class="vc_column-inner ">
-                                    <div class="wpb_wrapper">
+                                    <div class="wpb_wrapper" style="padding-top:80px">
 
                                         <div class="masonry-folio-main-wrap content folio-grid-style-two-wrap column-filter-wrap">
 
@@ -166,7 +178,19 @@
                                                         <div class="gallery-item foliover-style1 gallery-item-two  portfolio type-portfolio status-publish has-post-thumbnail hentry portfolio_@item.type">
                                                             <div class="grid-item-holder">
                                                                 <div class="grid-item-holder-inner">
-                                                                    <img width="308" height="204" src="~/images/panelimages/@item.title" class="attachment-bloomver-size-one size-bloomver-size-one wp-post-image" alt="" srcset="~/images/panelimages/@item.title 800w, ~/images/panelimages/@item.title 300w, ~/images/panelimages/@item.title 768w" sizes="(max-width: 308px) 100vw, 308px" />
+                                                                    @if (item.title.Contains("mp4"))
+                                                                    {
+                                                                        <video style="max-width: 180px; max-height:100px" controls>
+                                                                            <source ssrc="/images/panelimages/@item.title" type="video/mp4">
+                                                                            <source src="/images/panelimages/@item.title" type="video/ogg">
+                                                                            Your browser does not support the video tag.
+                                                                        </video>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <img width="308" height="204" src="~/images/panelimages/@item.title" class="attachment-bloomver-size-one size-bloomver-size-one wp-post-image" alt="" srcset="~/images/panelimages/@item.title 800w, ~/images/panelimages/@item.title 300w, ~/images/panelimages/@item.title 768w" sizes="(max-width: 308px) 100vw, 308px" />
+
+                                                                    }
 
                                                                     <a data-src="~/images/panelimages/@item.title" class="folio-popup-gallery slider-zoom"><i class="fa fa-search"></i></a>
 

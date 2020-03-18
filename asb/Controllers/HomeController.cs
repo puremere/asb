@@ -15,15 +15,15 @@ namespace asb.Controllers
         public ActionResult Index()
         {
            
-            List<vmedia> medialist = manager.getMediaList().Select(i => new vmedia
+            List<vmedia> medialist = manager.getMediaList().Where((x=> !x.title.Contains(".mp4"))).Select(i => new vmedia
             {
                 ID = i.ID,
                 title = i.title,
                 type = i.MediaType.title,
 
             }).ToList();
-            List<int> idlist = medialist.Select(m => m.ID).Distinct().ToList();
-            List<VtypeList> typeList = manager.getMediaTypeList().Where(c => idlist.Contains(c.typeID)).Select(i => new VtypeList
+            List<string> idlist = medialist.Select(m => m.type).Distinct().ToList();
+            List<VtypeList> typeList = manager.getMediaTypeList().Where(c => idlist.Contains(c.title)).Select(i => new VtypeList
             {
                  title = i.title,
                   ID = i.typeID
@@ -77,6 +77,120 @@ namespace asb.Controllers
             {
                 item.content = ExtractHtmlInnerText(item.content);
             }
+            return View(model);
+        }
+
+        public ActionResult blogDetail(int id)
+        {
+            article article = manager.getArticle(id);
+            List<article> whole = manager.getArticleList(0, "", "").ToList();
+            int index = whole.IndexOf(article);
+            article nextArticle =  (index + 1) <= whole.Count() - 1 ?  whole[index + 1] : null;
+            article preArticle = (index - 1) >= 0 && (index - 1) < whole.Count() - 1 ? whole[index - 1] : null; 
+               
+                blogDetailVM model = new blogDetailVM() {
+                     article = article,
+                      nextArticle = nextArticle,
+                       previousArticle = preArticle
+
+                };
+            return View(model);
+        }
+
+        public ActionResult Live()
+        {
+            return View();
+        }
+        public ActionResult Bio() {
+            return View();
+        }
+        public ActionResult Video() {
+            List<vmedia> medialist = manager.getMediaList().Where((x => x.title.Contains(".mp4"))).Select(i => new vmedia
+            {
+                ID = i.ID,
+                title = i.title,
+                type = i.MediaType.title,
+
+            }).ToList();
+
+
+            return View(medialist);
+          
+        }
+        public ActionResult loginRegister(string message)
+        {
+            ViewBag.LoginMessage = "";
+
+            if (message != null)
+            {
+                ViewBag.LoginMessage = "نام کاربری یا رمز عبور اشتباه است";
+            }
+            return View();
+        }
+        public ActionResult confirmCode(string message)
+        {
+            ViewBag.message = "";
+            if (message != null)
+            {
+                
+                ViewBag.message = "کد تایید صحیح نیست";
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(string post_phone)
+        {
+            if (true) // check if user not used and then send code
+            {
+                
+                Session["code"] = "1234";
+                return RedirectToAction("confirmCode");
+            }
+            else
+            {
+                // error comes from manager
+                ViewBag.RegisterMessage = "error";
+                return RedirectToAction("confirmCode", new { message = "register"}); 
+            }
+            
+        }
+        [HttpPost]
+        public ActionResult CheckCode(string post_code)
+        {
+            if (Session["code"] as string == post_code)
+            {
+                // create user save to session user
+                Session["user"] = 1;
+                return RedirectToAction("UserProfile");
+            }
+            else
+            {
+                return RedirectToAction("confirmCode", new { message = "error"});
+            }
+            
+        }
+        [HttpPost]
+        public ActionResult login(string post_username,string post_password)
+        {
+            // check if user is valid
+            if (true)
+            {
+                Session["user"] = 1;
+                return RedirectToAction("UserProfile");
+            }
+            else
+            {
+                return RedirectToAction("loginRegister" , new { message = "error"});
+            }
+            
+        }
+        public ActionResult UserProfile()
+        {
+            int id = (int)Session["user"];
+            profileVM model = new profileVM() {
+                user = manager.getUserByID(id),
+                mediaList = manager.getUserMediaList(id).ToList(),
+            };
             return View(model);
         }
     }

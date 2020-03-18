@@ -126,6 +126,7 @@ namespace asb.Models
         public IQueryable<mediaType> getMediaTypeList()
         {
             var list = context.mediaTypes.AsQueryable();
+            List<mediaType> lst = list.ToList();
             return list;
         }
         public int returnTypeID(string title)
@@ -176,6 +177,7 @@ namespace asb.Models
         #region Usermedia
         public IQueryable<userMedia> getUserMediaList(int userID)
         {
+            List<userMedia> lst = context.userMedias.ToList();
             return context.userMedias.Where(x => x.userID == userID).AsQueryable();
         }
         public int getUserID (string name)
@@ -194,13 +196,26 @@ namespace asb.Models
                 return 0;
             }
         }
+        public user getUserByID (int ID)
+        {
+            return context.users.SingleOrDefault(x => x.userID == ID);
+        }
         public IQueryable<user> getUsers() {
             return context.users.AsQueryable();
         }
         public void addUser(user model)
         {
-            context.users.Add(model);
-            context.SaveChanges();
+            try
+            {
+                context.users.Add(model);
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+              
+            }
+          
         }
 
         public void addUserMedia(userMedia model)

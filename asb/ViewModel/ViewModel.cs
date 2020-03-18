@@ -110,8 +110,16 @@ namespace asb.ViewModel
         public string imageTitle { get; set; }
         public List<article> articleList { get; set; }
     }
+    public class blogDetailVM
+    {
+        public article article  { get; set; }
+        public article nextArticle { get; set; }
+        public article previousArticle { get; set; }
+    }
 
-
-
-
+    public class profileVM
+    {
+        public List<userMedia> mediaList { get; set; }
+        public user user { get; set; }
+    }
 }

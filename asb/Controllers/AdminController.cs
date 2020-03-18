@@ -163,7 +163,7 @@ namespace asb.Controllers
 
                 if (hpf.ContentLength == 0)
                     continue;
-                imagename = RandomString(7) + ".jpg";
+                imagename = RandomString(7) + Path.GetExtension(hpf.FileName);
                 string savedFileName = Path.Combine(Server.MapPath(pathString), imagename);
                 hpf.SaveAs(savedFileName);
             }
@@ -256,7 +256,7 @@ namespace asb.Controllers
 
                 if (hpf.ContentLength == 0)
                     continue;
-                imagename = RandomString(7) + ".jpg";
+                imagename = RandomString(7) + Path.GetExtension(hpf.FileName);
                 string savedFileName = Path.Combine(Server.MapPath(pathString), imagename);
                 hpf.SaveAs(savedFileName);
 
@@ -380,9 +380,9 @@ namespace asb.Controllers
                 DirectoryInfo di = Directory.CreateDirectory(Server.MapPath(pathString));
             }
             string tobeaddedtoimagename = RandomString(7);
-            string savedFileName = Path.Combine(Server.MapPath(pathString), tobeaddedtoimagename + ".jpg");
+            string savedFileName = Path.Combine(Server.MapPath(pathString), tobeaddedtoimagename + Path.GetExtension(blob.FileName));
             blob.SaveAs(savedFileName);
-            Session["imageListEdit"] = Session["imageListEdit"] as string + tobeaddedtoimagename + ".jpg,";
+            Session["imageListEdit"] = Session["imageListEdit"] as string + tobeaddedtoimagename + Path.GetExtension(blob.FileName);
             string ss = Session["imageListEdit"] as string;
             // ss = ss + filename;
             ss = ss.Substring(0, ss.Length - 1);
@@ -657,12 +657,12 @@ namespace asb.Controllers
                 typeList.Add(item.title);
             }
 
-            //manager.addUser(new user
-            //{
-            //     fullname = "مهرداد منصوری",
-            //      phone = "09194594505",
-            //       email = "a@gmail.com"
-            //});
+            manager.addUser(new user
+            {
+                fullname = "مهرداد منصوری",
+                phone = "09194594505",
+                email = "a@gmail.com"
+            });
 
             List<string> userList = new List<string>();
             foreach (var item in manager.getUsers().ToList())
@@ -714,8 +714,17 @@ namespace asb.Controllers
                     string savedFileName = Path.Combine(Server.MapPath(pathString), mediaName + Path.GetExtension(hpf.FileName));
                     hpf.SaveAs(savedFileName); // Save the file
 
+                };
+                int TypeID = 0;
+                if (detail.dataType == "user")
+                {
+                    TypeID = manager.getUserID(detail.typeTitle);
                 }
-                int TypeID = manager.returnTypeID(detail.typeTitle);
+                else
+                {
+                    TypeID = manager.returnTypeID(detail.typeTitle);
+                }
+
                 foreach (var item in medialist)
                 {
                     if (detail.dataType == "user")
